@@ -38,16 +38,34 @@ results := NewAsyncWorkWithResult[int]().TaskWithResult(
     }).AwaitResult()
 ```
 
-
 </details>
 
 <details>
 <summary>Command exec</summary>
 
+#### Run posix command and get output as byte array
+
+```go
+out := Exec("echo", "test")
+```
+
+#### Run posix command with pipes
+
+```go
+strReader := strings.NewReader("hello world")
+
+outWriter := bytes.NewBuffer(nil)
+errWriter := bytes.NewBuffer(nil)
+
+ExecPipe(strReader, outWriter, errWriter, "echo", "test")
+outputStr := outWriter.String()
+```
+
+
 </details>
 
 <details>
-<summary>Zero alloc</summary>
+<summary>Zero alloc string byte conversion</summary>
 
 </details>
 
