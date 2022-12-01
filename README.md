@@ -67,6 +67,17 @@ outputStr := outWriter.String()
 <details>
 <summary>Zero alloc string byte conversion</summary>
 
+#### String to byte array zero allocation
+
+```go
+str := String([]byte("test"))
+```
+#### Byte to string
+
+```go
+byteArr := Byte("test")
+```
+
 </details>
 
 <details>
