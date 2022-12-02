@@ -83,4 +83,13 @@ byteArr := Byte("test")
 <details>
 <summary>Time utils</summary>
 
+#### Function execution elapsed time utility
+
+```go
+elapsedTime := ElapsedTime(func() {
+	time.Sleep(100 * time.Millisecond)
+})
+```
+	
+
 </details>
