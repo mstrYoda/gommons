@@ -6,6 +6,7 @@ Swiss army knife for Golang developers
 
 - [X] Async tasks
 - [X] Async tasks with results
+- [X] Async Pub/Sub Queue
 - [X] Command exec utils
 - [X] Zero alloc string-byte conversion
 - [X] Time utils
