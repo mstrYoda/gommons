@@ -41,6 +41,42 @@ results := NewAsyncWorkWithResult[int]().TaskWithResult(
 </details>
 
 <details>
+<summary>Queue Pub/Sub example</summary>
+
+Queue acts as a non-blocking message queue backing with unbuffered channel.
+Publish/Subscribe functions are not blocks code execution.
+
+```go
+q := NewQueue[int]()
+q.Publish(context.Background(), 1)
+q.Publish(context.Background(), 2)
+
+q.Subscribe(context.Background(), func(data int) {
+	fmt.Println("data readed ", data)
+})
+
+<-make(chan struct{})
+```
+
+You can also give timeout to both message publish and subscribe functions:
+
+```go
+q := NewQueue[int]()
+ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+defer cancel()
+q.Publish(context.Background(), 1)
+q.Publish(ctx, 2)
+
+q.Subscribe(ctx, func(data int) {
+	fmt.Println("data readed ", data)
+})
+
+<-make(chan struct{})
+```
+
+</details>
+
+<details>
 <summary>Command exec</summary>
 
 #### Run posix command and get output as byte array
@@ -60,7 +96,6 @@ errWriter := bytes.NewBuffer(nil)
 ExecPipe(strReader, outWriter, errWriter, "echo", "test")
 outputStr := outWriter.String()
 ```
-
 
 </details>
 
