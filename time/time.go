@@ -7,3 +7,10 @@ func ElapsedTime(f func()) time.Duration {
 	f()
 	return time.Now().Sub(startTime)
 }
+
+func IsTimeBetweenRange(givenTime, time1, time2 time.Time) bool {
+	if givenTime.After(time1) && givenTime.Before(time2) {
+		return true
+	}
+	return false
+}
