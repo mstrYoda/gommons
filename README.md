@@ -9,7 +9,8 @@ Swiss army knife for Golang developers
 - [X] Async Pub/Sub Queue
 - [X] Command exec utils
 - [X] Zero alloc string-byte conversion
-- [X] Time utils
+- [X] Function execution elapsed time util
+- [ ] Time utils
 - [ ] Array utils
 
 <details>
