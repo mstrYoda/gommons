@@ -27,3 +27,12 @@ func TestCap(t *testing.T) {
 		t.Errorf("Cap is should be %d", CAP)
 	}
 }
+
+func TestAppend(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+
+	if l.Len() != 5 {
+		t.Errorf("Len is should be 5")
+	}
+}

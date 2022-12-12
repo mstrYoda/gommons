@@ -1,11 +1,13 @@
 package list
 
-// List is an interface for safe statically typing.
+// List[T] is an interface for safe statically typing.
 type List[T any] interface {
 	Len() int
 	Cap() int
+	Append(...T)
 }
 
+// list[T] is an wrapper for the Go slices.
 type list[T any] struct {
 	buffer []T
 }
@@ -15,6 +17,11 @@ func (l *list[T]) Len() int { return len(l.buffer) }
 
 // Cap returns capacity of buffer.
 func (l *list[T]) Cap() int { return cap(l.buffer) }
+
+// Appends items to end of buffer.
+func (l *list[T]) Append(items ...T) {
+	l.buffer = append(l.buffer, items...)
+}
 
 func new_list[T any]() *list[T] {
 	l := new(list[T])
