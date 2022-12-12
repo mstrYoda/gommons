@@ -14,8 +14,9 @@ type List[T any] interface {
 	Clear()
 	Buffer() []T
 	Insert(int, ...T)
-	Clone() List[T]
+	RemoveAt(i int)
 	Map(func(T) T)
+	Clone() List[T]
 }
 
 // list[T] is an wrapper for the Go slices.
@@ -62,11 +63,20 @@ func (l *list[T]) Insert(i int, items ...T) {
 	l.buff = append(l.buff[:i], items...)
 }
 
+// RemoveAt removes element by offset.
+// Panics if i is out of range offset.
+func (l *list[T]) RemoveAt(i int) {
+	if l.Empty() || i < 0 || i >= l.Len() {
+		panic("index is out of range")
+	}
+	l.buff = append(l.buff[:i], l.buff[i+1:]...)
+}
+
 // Map iterates on buffer and assign returned T to current offset.
-// Does not nothing if handler == nil.
+// Panics if handler == nil.
 func (l *list[T]) Map(handler func(T) T) {
 	if handler == nil {
-		return
+		panic("handler is nil")
 	}
 	for i := range l.buff {
 		item := &l.buff[i]
