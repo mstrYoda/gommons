@@ -50,3 +50,17 @@ func TestEmpty(t *testing.T) {
 		t.Errorf("Empty should return false")
 	}
 }
+
+func TestString(t *testing.T) {
+	l := New[int]()
+
+	if l.String() != "[]" {
+		t.Errorf("String should return []")
+	}
+
+	l.Append(10, 20, 30, 40, 50)
+
+	if l.String() != "[10 20 30 40 50]" {
+		t.Errorf("Empty should return [10 20 30 40 50]")
+	}
+}

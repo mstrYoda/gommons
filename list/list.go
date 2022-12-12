@@ -1,11 +1,14 @@
 package list
 
+import "fmt"
+
 // List[T] is an interface for safe statically typing.
 type List[T any] interface {
 	Len() int
 	Cap() int
 	Append(...T)
 	Empty() bool
+	String() string
 }
 
 // list[T] is an wrapper for the Go slices.
@@ -22,6 +25,8 @@ func (l *list[T]) Cap() int { return cap(l.buffer) }
 // Empty reports length is zero.
 func (l *list[T]) Empty() bool { return l.Len() == 0 }
 
+func (l list[T]) String() string { return fmt.Sprint(l.buffer) }
+
 // Appends items to end of buffer.
 func (l *list[T]) Append(items ...T) {
 	l.buffer = append(l.buffer, items...)
@@ -29,6 +34,7 @@ func (l *list[T]) Append(items ...T) {
 
 func new_list[T any]() *list[T] {
 	l := new(list[T])
+	l.buffer = nil
 	return l;
 }
 
