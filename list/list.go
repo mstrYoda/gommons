@@ -9,17 +9,15 @@ type List[T any] interface {
 	Len() int
 	Cap() int
 	Empty() bool
+	Append(...T)
 	String() string
 	Clear()
-	Append(...T)
 	Clone() List[T]
 	Map(func(T) T)
 }
 
 // list[T] is an wrapper for the Go slices.
-type list[T any] struct {
-	buff []T
-}
+type list[T any] struct { buff []T }
 
 // At equals to indexing on buffer slice.
 func (l *list[T]) At(i int) T { return l.buff[i] }
@@ -36,6 +34,9 @@ func (l *list[T]) Cap() int { return cap(l.buff) }
 // Empty reports length is zero.
 func (l *list[T]) Empty() bool { return l.Len() == 0 }
 
+// Appends items to end of buffer.
+func (l *list[T]) Append(items ...T) { l.buff = append(l.buff, items...) }
+
 func (l list[T]) String() string { return fmt.Sprint(l.buff) }
 
 // Clear removes all elements.
@@ -51,11 +52,6 @@ func (l *list[T]) Map(handler func(T) T) {
 		item := &l.buff[i]
 		*item = handler(*item)
 	}
-}
-
-// Appends items to end of buffer.
-func (l *list[T]) Append(items ...T) {
-	l.buff = append(l.buff, items...)
 }
 
 // Clone returns immutable clone of list.
@@ -76,15 +72,20 @@ func new_list[T any]() *list[T] {
 // New returns new list instance.
 func New[T any]() List[T] { return new_list[T]() }
 
-// NewBuff returns new list instance by capacity.
+// Make returns new list instance by length && capacity.
+// Equals to make([]T, len, cap)
 //
 // Special casees are;
-//   NewBuff[T](cap) = cap accepts as zero (0) if cap < 0
-func NewBuff[T any](cap int) List[T] {
+//   Make[T](len, cap) = len accepts as zero (0) if len < 0
+//   Make[T](len, cap) = cap accepts as zero (0) if cap < 0
+func Make[T any](len, cap int) List[T] {
 	l := new_list[T]()
+	if len < 0 {
+		len = 0
+	}
 	if cap < 0 {
 		cap = 0
 	}
-	l.buff = make([]T, 0, cap)
+	l.buff = make([]T, len, cap)
 	return l;
 }

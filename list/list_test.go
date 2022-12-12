@@ -9,7 +9,7 @@ func TestLen(t *testing.T) {
 	}
 
 	const CAP = 20
-	l2 := NewBuff[int](CAP)
+	l2 := Make[int](0, CAP)
 	if l2.Len() != 0 {
 		t.Errorf("Len is should be zero")
 	}
@@ -22,7 +22,7 @@ func TestCap(t *testing.T) {
 	}
 
 	const CAP = 20
-	l2 := NewBuff[int](CAP)
+	l2 := Make[int](0, CAP)
 	if l2.Cap() != CAP {
 		t.Errorf("Cap is should be %d", CAP)
 	}
