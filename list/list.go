@@ -6,9 +6,10 @@ import "fmt"
 type List[T any] interface {
 	Len() int
 	Cap() int
-	Append(...T)
 	Empty() bool
 	String() string
+	Clear()
+	Append(...T)
 }
 
 // list[T] is an wrapper for the Go slices.
@@ -26,6 +27,9 @@ func (l *list[T]) Cap() int { return cap(l.buffer) }
 func (l *list[T]) Empty() bool { return l.Len() == 0 }
 
 func (l list[T]) String() string { return fmt.Sprint(l.buffer) }
+
+// Clear removes all elements.
+func (l *list[T]) Clear() { l.buffer = nil }
 
 // Appends items to end of buffer.
 func (l *list[T]) Append(items ...T) {

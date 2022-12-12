@@ -64,3 +64,13 @@ func TestString(t *testing.T) {
 		t.Errorf("Empty should return [10 20 30 40 50]")
 	}
 }
+
+func TestClear(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	l.Clear()
+
+	if l.Len() != 0 {
+		t.Errorf("Len should return zero")
+	}
+}
