@@ -107,3 +107,16 @@ func TestSet(t *testing.T) {
 		t.Errorf("n should be 20")
 	}
 }
+
+func TestMap(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	
+	l.Map(func(item int) int {
+		return item * 10
+	})
+
+	if l.String() != "[100 200 300 400 500]" {
+		t.Errorf("String should return [100 200 300 400 500]")
+	}
+}
