@@ -85,3 +85,14 @@ func TestClone(t *testing.T) {
 		t.Errorf("Clone returned false clone")
 	}
 }
+
+func TestAt(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	
+	n := l.At(0)
+
+	if n != 10 {
+		t.Errorf("n should be 10")
+	}
+}

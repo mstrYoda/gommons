@@ -4,6 +4,7 @@ import "fmt"
 
 // List[T] is an interface for safe statically typing.
 type List[T any] interface {
+	At(int) T
 	Len() int
 	Cap() int
 	Empty() bool
@@ -17,6 +18,9 @@ type List[T any] interface {
 type list[T any] struct {
 	buffer []T
 }
+
+// At equals to indexing on buffer slice.
+func (l *list[T]) At(i int) T { return l.buffer[i] }
 
 // Len returns length of elements.
 func (l *list[T]) Len() int { return len(l.buffer) }
