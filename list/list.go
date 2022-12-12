@@ -20,7 +20,7 @@ type List[T any] interface {
 	Clone() List[T]
 }
 
-// list[T] is an wrapper for the Go slices.
+// list[T] is a wrapper for the Go slices.
 type list[T any] struct { buff []T }
 
 // At equals to indexing on buffer slice.
