@@ -74,3 +74,14 @@ func TestClear(t *testing.T) {
 		t.Errorf("Len should return zero")
 	}
 }
+
+func TestClone(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	
+	l2 := l.Clone()
+
+	if l.String() != l2.String() {
+		t.Errorf("Clone returned false clone")
+	}
+}

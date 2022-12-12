@@ -10,6 +10,7 @@ type List[T any] interface {
 	String() string
 	Clear()
 	Append(...T)
+	Clone() List[T]
 }
 
 // list[T] is an wrapper for the Go slices.
@@ -34,6 +35,15 @@ func (l *list[T]) Clear() { l.buffer = nil }
 // Appends items to end of buffer.
 func (l *list[T]) Append(items ...T) {
 	l.buffer = append(l.buffer, items...)
+}
+
+// Clone returns immutable clone of list.
+// Not copies capacity.
+func (l *list[T]) Clone() List[T] {
+	nl := new_list[T]()
+	nl.buffer = make([]T, l.Len())
+	_ = copy(nl.buffer, l.buffer)
+	return nl
 }
 
 func new_list[T any]() *list[T] {
