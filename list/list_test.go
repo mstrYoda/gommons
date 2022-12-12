@@ -96,3 +96,14 @@ func TestAt(t *testing.T) {
 		t.Errorf("n should be 10")
 	}
 }
+
+func TestSet(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	
+	l.Set(0, 20)
+
+	if l.At(0) != 20 {
+		t.Errorf("n should be 20")
+	}
+}
