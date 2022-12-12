@@ -13,6 +13,7 @@ type List[T any] interface {
 	String() string
 	Clear()
 	Buffer() []T
+	Insert(int, ...T)
 	Clone() List[T]
 	Map(func(T) T)
 }
@@ -45,6 +46,21 @@ func (l *list[T]) Clear() { l.buff = nil }
 
 // Buffer returns buffer (mutable).
 func (l *list[T]) Buffer() []T { return l.buff }
+
+// Insert inserts items by offset.
+//
+// Special cases are;
+//   Insert(i, items) = appends if l.Empty() || i <= 0 || i >= l.Len()
+func (l *list[T]) Insert(i int, items ...T) {
+	// Special cases
+	if l.Empty() || i <= 0 || i >= l.Len() {
+		l.Append(items...)
+		return
+	}
+
+	items = append(items, l.buff[i:]...)
+	l.buff = append(l.buff[:i], items...)
+}
 
 // Map iterates on buffer and assign returned T to current offset.
 // Does not nothing if handler == nil.

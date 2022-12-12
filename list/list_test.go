@@ -131,3 +131,14 @@ func TestBuffer(t *testing.T) {
 		t.Errorf("Buffer returns false buffer data")
 	}
 }
+
+func TestInsert(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	l.Insert(2, 100, 200, 300)
+	t.Log(l.String())
+
+	if l.String() != "[10 20 100 200 300 30 40 50]" {
+		t.Errorf("String should return [10 20 100 200 300 30 40 50]")
+	}
+}
