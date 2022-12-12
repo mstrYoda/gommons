@@ -12,6 +12,7 @@ type List[T any] interface {
 	Append(...T)
 	String() string
 	Clear()
+	Buffer() []T
 	Clone() List[T]
 	Map(func(T) T)
 }
@@ -41,6 +42,9 @@ func (l list[T]) String() string { return fmt.Sprint(l.buff) }
 
 // Clear removes all elements.
 func (l *list[T]) Clear() { l.buff = nil }
+
+// Buffer returns buffer (mutable).
+func (l *list[T]) Buffer() []T { return l.buff }
 
 // Map iterates on buffer and assign returned T to current offset.
 // Does not nothing if handler == nil.

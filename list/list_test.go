@@ -120,3 +120,14 @@ func TestMap(t *testing.T) {
 		t.Errorf("String should return [100 200 300 400 500]")
 	}
 }
+
+func TestBuffer(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30, 40, 50)
+	
+	buff := l.Buffer()
+
+	if len(buff) != l.Len() {
+		t.Errorf("Buffer returns false buffer data")
+	}
+}
