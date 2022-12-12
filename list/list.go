@@ -15,6 +15,7 @@ type List[T any] interface {
 	Buffer() []T
 	Insert(int, ...T)
 	RemoveAt(i int)
+	Foreach(func(T))
 	Map(func(T) T)
 	Clone() List[T]
 }
@@ -70,6 +71,17 @@ func (l *list[T]) RemoveAt(i int) {
 		panic("index is out of range")
 	}
 	l.buff = append(l.buff[:i], l.buff[i+1:]...)
+}
+
+// Foreach iterates on buffer.
+// Panics if handler == nil
+func (l *list[T]) Foreach(handler func(T)) {
+	if handler == nil {
+		panic("handler is nil")
+	}
+	for _, elem := range l.buff {
+		handler(elem)
+	}
 }
 
 // Map iterates on buffer and assign returned T to current offset.

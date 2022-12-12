@@ -151,3 +151,22 @@ func TestRemoveAt(t *testing.T) {
 		t.Errorf("String should return [10 20 40 50]")
 	}
 }
+
+func TestForeach(t *testing.T) {
+	l := New[int]()
+	l.Append(10, 20, 30)
+	offset := 0
+	l.Foreach(func(i int) {
+		switch {
+		case offset == 0 && i != 10:
+			t.Errorf("i is should be 10 when offset = 0")
+		case offset == 1 && i != 20:
+			t.Errorf("i is should be 20 when offset = 1")
+		case offset == 2 && i != 30:
+			t.Errorf("i is should be 30 when offset = 2")
+		case offset > 2:
+			t.Errorf("offset overflows length")
+		}
+		offset += 1
+	})
+}
