@@ -5,6 +5,7 @@ type List[T any] interface {
 	Len() int
 	Cap() int
 	Append(...T)
+	Empty() bool
 }
 
 // list[T] is an wrapper for the Go slices.
@@ -17,6 +18,9 @@ func (l *list[T]) Len() int { return len(l.buffer) }
 
 // Cap returns capacity of buffer.
 func (l *list[T]) Cap() int { return cap(l.buffer) }
+
+// Empty reports length is zero.
+func (l *list[T]) Empty() bool { return l.Len() == 0 }
 
 // Appends items to end of buffer.
 func (l *list[T]) Append(items ...T) {

@@ -36,3 +36,17 @@ func TestAppend(t *testing.T) {
 		t.Errorf("Len is should be 5")
 	}
 }
+
+func TestEmpty(t *testing.T) {
+	l := New[int]()
+
+	if !l.Empty() {
+		t.Errorf("Empty should return true")
+	}
+
+	l.Append(10, 20, 30, 40, 50)
+
+	if l.Empty() {
+		t.Errorf("Empty should return false")
+	}
+}
