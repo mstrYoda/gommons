@@ -130,3 +130,7 @@ elapsedTime := ElapsedTime(func() {
 	
 
 </details>
+
+
+## Getting All Dependencies
+### To get all Dependencies in project run `go mod tidy` in root of project
